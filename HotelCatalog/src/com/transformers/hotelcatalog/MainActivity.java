@@ -3,8 +3,8 @@ package com.transformers.hotelcatalog;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.telerik.everlive.sdk.core.EverliveApp;
-import com.telerik.everlive.sdk.core.result.RequestResult;
+//import com.telerik.everlive.sdk.core.EverliveApp;
+//import com.telerik.everlive.sdk.core.result.RequestResult;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,11 +21,14 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 	private List<Hotel> hotels = new ArrayList<Hotel>();
 
-<<<<<<< HEAD
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+//		EverliveApp app = new EverliveApp("0LOLF0K5aFI9RsSE");
+//		RequestResult allItems = app.workWith().data(Hotel.class).getAll().executeSync();
+		
 		populateHotels();
 		populateListView();
 	}
@@ -57,37 +60,12 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				itemView = getLayoutInflater().inflate(R.layout.hotel_view,
 						parent, false);
 			}
-=======
-	private ListView listview;
-	private List<String> list;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        EverliveApp app = new EverliveApp("0LOLF0K5aFI9RsSE");
-        //RequestResult allItems = app.workWith().data(Hotel.class).getAll().executeSync();
-        //populateListView();
-    }
->>>>>>> 67a65d46375fbc9f61ce813a393b5a5a4f3fdab7
 
 			Hotel currentHotel = hotels.get(position);
 
-<<<<<<< HEAD
 			ImageView imageIcon = (ImageView) itemView
 					.findViewById(R.id.item_imageIcon);
 			imageIcon.setImageResource(currentHotel.getIconID());
-=======
-    private void populateListView() {
-		// TODO Auto-generated method stub
-		String[] items = {"Hotel1", "Hotel2", "Hotel3", "Hotel4"}; 
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_main, items); 
-		
-		this.listview = (ListView)this.findViewById(R.id.listViewHotels);
-		listview.setAdapter(adapter);
-	} 
->>>>>>> 67a65d46375fbc9f61ce813a393b5a5a4f3fdab7
 
 			TextView textName = (TextView) itemView
 					.findViewById(R.id.item_hotelName);
