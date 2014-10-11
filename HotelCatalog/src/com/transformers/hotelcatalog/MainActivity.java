@@ -2,6 +2,9 @@ package com.transformers.hotelcatalog;
 
 import java.util.List;
 
+import com.telerik.everlive.sdk.core.EverliveApp;
+import com.telerik.everlive.sdk.core.result.RequestResult;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,7 +21,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        populateListView();
+        
+        EverliveApp app = new EverliveApp("0LOLF0K5aFI9RsSE");
+        //RequestResult allItems = app.workWith().data(Hotel.class).getAll().executeSync();
+        //populateListView();
     }
 
 
@@ -26,7 +32,7 @@ public class MainActivity extends Activity {
 		// TODO Auto-generated method stub
 		String[] items = {"Hotel1", "Hotel2", "Hotel3", "Hotel4"}; 
 		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.hotel_view, items); 
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_main, items); 
 		
 		this.listview = (ListView)this.findViewById(R.id.listViewHotels);
 		listview.setAdapter(adapter);
