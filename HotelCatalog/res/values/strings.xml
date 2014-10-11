@@ -3,5 +3,7 @@
 
     <string name="app_name">Hotel Catalog</string>
     <string name="action_settings">About</string>
+    <string name="hotel_titles">Hotel List</string>
+    
 
 </resources>
