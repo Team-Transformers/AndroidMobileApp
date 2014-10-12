@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".HotelOptions"> </activity>
+        <activity android:name=".HotelInfo"> </activity>
+        <activity android:name=".HotelGallery"> </activity>
+        <activity android:name=".HotelReservations"> </activity>
+        <activity android:name=".HotelContacts"> </activity>
     </application>
 
 </manifest>
