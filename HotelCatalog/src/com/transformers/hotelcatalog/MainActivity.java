@@ -3,8 +3,8 @@ package com.transformers.hotelcatalog;
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.telerik.everlive.sdk.core.EverliveApp;
-//import com.telerik.everlive.sdk.core.result.RequestResult;
+import com.telerik.everlive.sdk.core.EverliveApp;
+import com.telerik.everlive.sdk.core.result.RequestResult;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,16 +19,22 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnItemClickListener {
 
-	private List<Hotel> hotels = new ArrayList<Hotel>();
+	 private List<Hotel> hotels = new ArrayList<Hotel>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-//		EverliveApp app = new EverliveApp("0LOLF0K5aFI9RsSE");
-//		RequestResult allItems = app.workWith().data(Hotel.class).getAll().executeSync();
-		
+
+		EverliveApp app = new EverliveApp("0LOLF0K5aFI9RsSE");
+		RequestResult allItems = app.workWith().data(Hotel.class).getAll()
+				.executeSync();
+
+		if (allItems.getSuccess()) {
+			// returns all hotels (not in use yet)
+			ArrayList hotels = (ArrayList) allItems.getValue();
+		}
+
 		populateHotels();
 		populateListView();
 	}

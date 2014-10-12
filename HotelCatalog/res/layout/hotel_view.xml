@@ -29,9 +29,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/item_imageIcon"
+        android:layout_alignLeft="@+id/item_hotelName"
+        android:text="Hotel location"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/item_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/item_hotelLocation"
+        android:layout_alignBottom="@+id/item_hotelLocation"
         android:layout_alignParentRight="true"
         android:layout_marginRight="14dp"
-        android:text="Hotel location"
+        android:text="click for more info..."
+        android:textSize="10sp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
