@@ -12,7 +12,8 @@ import android.view.View.OnClickListener;
 
 public class HotelOptions extends Activity {
 
-	private TextView passedView = null;
+	private TextView hotelTitle = null;
+	private TextView hotelTown = null;
 	private ImageView info = null;
 	private ImageView gallery = null;
 	private ImageView reservations = null;
@@ -76,9 +77,13 @@ public class HotelOptions extends Activity {
 		super.onResume();
 		String data = getIntent().getStringExtra("Name");
 		String ratingString = getIntent().getStringExtra("Rating");
+		String town = getIntent().getStringExtra("Town");
 
-		passedView = (TextView) findViewById(R.id.hotel_title);
-		passedView.setText("Hotel " + data);
+		hotelTitle = (TextView) findViewById(R.id.hotel_title);
+		hotelTitle.setText("Hotel " + data);
+		
+		hotelTown = (TextView) findViewById(R.id.hotel_town);
+		hotelTown.setText(town);
 
 		int rating = Integer.parseInt(ratingString);
 		rb = (RatingBar) findViewById(R.id.ratingBar);

@@ -8,19 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="10dp"
         android:text="@string/hotel_titles"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"
         android:textStyle="bold" />
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hotel_title"
-        android:layout_centerHorizontal="true"
-        android:isIndicator="true" />
 
     <ImageView
         android:id="@+id/icon_contacts"
@@ -44,29 +35,6 @@
         android:text="Image Gallery"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ImageView
-        android:id="@+id/icon_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ratingBar"
-        android:layout_below="@+id/ratingBar"
-        android:layout_marginTop="20dp"
-        android:adjustViewBounds="true"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
-        android:src="@drawable/info" />
-
-    <ImageView
-        android:id="@+id/icon_gallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/info_text"
-        android:layout_alignRight="@+id/ratingBar"
-        android:adjustViewBounds="true"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
-        android:src="@drawable/gallery" />
-
     <TextView
         android:id="@+id/info_text"
         android:layout_width="wrap_content"
@@ -75,29 +43,6 @@
         android:layout_below="@+id/icon_info"
         android:layout_centerHorizontal="true"
         android:text="Information"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/icon_reservations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/info_text"
-        android:layout_below="@+id/info_text"
-        android:layout_marginTop="20dp"
-        android:adjustViewBounds="true"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
-        android:src="@drawable/reservations" />
-
-    <TextView
-        android:id="@+id/reservations_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/icon_reservations"
-        android:layout_below="@+id/icon_reservations"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:text="Reservations"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -109,6 +54,70 @@
         android:layout_alignLeft="@+id/icon_contacts"
         android:layout_marginLeft="14dp"
         android:text="Contacts"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/icon_reservations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/info_text"
+        android:layout_below="@+id/info_text"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:src="@drawable/reservations" />
+
+    <TextView
+        android:id="@+id/reservations_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/icon_reservations"
+        android:layout_below="@+id/icon_reservations"
+        android:layout_marginTop="12dp"
+        android:text="Reservations"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hotel_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:isIndicator="true" />
+
+    <ImageView
+        android:id="@+id/icon_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ratingBar"
+        android:layout_below="@+id/ratingBar"
+        android:layout_marginTop="21dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:src="@drawable/info" />
+
+    <ImageView
+        android:id="@+id/icon_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gallery_text"
+        android:layout_alignRight="@+id/ratingBar"
+        android:adjustViewBounds="true"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"
+        android:src="@drawable/gallery" />
+
+    <TextView
+        android:id="@+id/hotel_town"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hotel_title"
+        android:layout_centerHorizontal="true"
+        android:scrollHorizontally="false"
+        android:text="Hotel town"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

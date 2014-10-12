@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-    
+
     <TextView
         android:id="@+id/hotel_gallery"
         android:layout_width="wrap_content"
@@ -14,5 +13,23 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <GridView
+        android:id="@+id/grid_gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/hotel_gallery"
+        android:layout_margin="0dip"
+        android:columnWidth="90dp"
+        android:drawSelectorOnTop="true"
+        android:horizontalSpacing="0px"
+        android:numColumns="auto_fit"
+        android:padding="0dip"
+        android:stretchMode="columnWidth"
+        android:gravity="center" 
+        android:layout_gravity="center"
+        android:verticalSpacing="0px" >
+    </GridView>
 
 </RelativeLayout>

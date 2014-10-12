@@ -83,6 +83,7 @@ public class MainActivity extends Activity {
 				Intent i = new Intent(MainActivity.this, HotelOptions.class);
 				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
 				i.putExtra("Rating", String.valueOf(clickedHotel.getRating()));
+				i.putExtra("Town", String.valueOf(clickedHotel.getLocation()));
 				
 				startActivity(i);
 			}
