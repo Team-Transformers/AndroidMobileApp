@@ -2,12 +2,13 @@ package com.transformers.hotelcatalog;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.result.RequestResult;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,10 +17,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnItemClickListener {
+@SuppressLint("ShowToast")
+public class MainActivity extends Activity{
 
-	 private List<Hotel> hotels = new ArrayList<Hotel>();
+	public final static String ID_EXTRA = "com.transformers.hotelcatalog._ID";
+	private List<Hotel> hotels = new ArrayList<Hotel>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 		populateHotels();
 		populateListView();
+		registerClickCallback();
 	}
 
 	private void populateHotels() {
@@ -52,6 +57,21 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		ArrayAdapter<Hotel> adapter = new HotelsListAdapter();
 		ListView list = (ListView) findViewById(R.id.hotelsListView);
 		list.setAdapter(adapter);
+	}
+
+	private void registerClickCallback() {
+		ListView list = (ListView) findViewById(R.id.hotelsListView);
+		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View viewClicked,
+					int position, long id) {
+				Hotel clickedHotel = hotels.get(position);
+				Intent i = new Intent(MainActivity.this, HotelOptions.class);
+				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
+				startActivity(i);
+			}
+		});
 	}
 
 	public class HotelsListAdapter extends ArrayAdapter<Hotel> {
@@ -83,14 +103,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
 			return itemView;
 		}
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		// TODO Attach onclick to every list item
-		// TextView text = (TextView) view;
-		// Toast.makeText(this, text.getText(), Toast.LENGTH_SHORT).show();
 	}
 
 	// @Override
