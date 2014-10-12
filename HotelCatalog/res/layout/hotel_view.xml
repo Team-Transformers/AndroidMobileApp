@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
         android:maxHeight="70dp"
-        android:maxWidth="50dp"
+        android:maxWidth="60dp"
         android:src="@drawable/hilton" />
 
     <TextView

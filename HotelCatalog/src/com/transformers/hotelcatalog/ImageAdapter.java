@@ -10,10 +10,14 @@ import android.widget.ImageView.ScaleType;
 
 public class ImageAdapter extends BaseAdapter {
 
-	int[] images = { R.drawable.one, R.drawable.two, R.drawable.three,
-			R.drawable.four, R.drawable.five, R.drawable.six, R.drawable.seven,
-			R.drawable.eight, R.drawable.nine, R.drawable.ten,
-			R.drawable.eleven, R.drawable.twelve };
+	int[] images = { R.drawable.camera, R.drawable.camera, R.drawable.camera,
+			R.drawable.camera, R.drawable.camera, R.drawable.camera,
+			R.drawable.camera, R.drawable.camera, R.drawable.camera,
+			R.drawable.camera, R.drawable.camera, R.drawable.camera,
+			R.drawable.camera, R.drawable.camera, R.drawable.camera,
+			R.drawable.camera, R.drawable.camera, R.drawable.camera,
+			R.drawable.camera, R.drawable.camera, R.drawable.camera,
+			R.drawable.camera, R.drawable.camera, R.drawable.camera };
 
 	private Context context;
 
@@ -43,8 +47,8 @@ public class ImageAdapter extends BaseAdapter {
 			iv = (ImageView) convertView;
 		} else {
 			iv = new ImageView(context);
-			iv.setScaleType(ScaleType.FIT_CENTER);
-			iv.setPadding(0, -70, 0, -70);
+			iv.setScaleType(ScaleType.CENTER_CROP);
+			iv.setPadding(10, -20, 10, -20);
 		}
 		iv.setImageResource(images[position]);
 		return iv;

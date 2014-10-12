@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -41,7 +42,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
 		EverliveApp app = new EverliveApp("0LOLF0K5aFI9RsSE");
 		RequestResult allItems = app.workWith().data(Hotel.class).getAll()
 				.executeSync();
@@ -58,6 +60,12 @@ public class MainActivity extends Activity {
 	}
 
 	private void populateHotels() {
+		hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
+		hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
+		hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
+		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
+		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton, 4));
+		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
 		hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
 		hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
 		hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
@@ -84,7 +92,7 @@ public class MainActivity extends Activity {
 				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
 				i.putExtra("Rating", String.valueOf(clickedHotel.getRating()));
 				i.putExtra("Town", String.valueOf(clickedHotel.getLocation()));
-				
+
 				startActivity(i);
 			}
 		});
@@ -134,13 +142,15 @@ public class MainActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) { 
-			Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+		if (id == R.id.action_settings) {
+			Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null,
+					null);
 			cursor.moveToFirst();
-			
+
 			// TODO: make it popupWindow or something else
-			Toast.makeText(context, cursor.getString(0), Toast.LENGTH_LONG).show();
-			
+			Toast.makeText(context, cursor.getString(0), Toast.LENGTH_LONG)
+					.show();
+
 			cursor.close();
 			return true;
 		}
@@ -148,11 +158,13 @@ public class MainActivity extends Activity {
 	}
 
 	private void InitializeAboutApp() {
-		db=openOrCreateDatabase("HotelAbout", Context.MODE_PRIVATE, null);
-		db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+"(comment VARCHAR);");
-		// TODO: fix bug where old records never deleted or double or more inserted
-		//db.delete(TABLE_NAME, null, null);
-		
+		db = openOrCreateDatabase("HotelAbout", Context.MODE_PRIVATE, null);
+		db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME
+				+ "(comment VARCHAR);");
+		// TODO: fix bug where old records never deleted or double or more
+		// inserted
+		// db.delete(TABLE_NAME, null, null);
+
 		ContentValues values = new ContentValues();
 		values.put("comment", ABOUT_HOTEL_INFO_MESSAGE);
 		db.insert(TABLE_NAME, null, values);

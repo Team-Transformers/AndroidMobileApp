@@ -23,13 +23,14 @@
         android:layout_margin="0dip"
         android:columnWidth="90dp"
         android:drawSelectorOnTop="true"
-        android:horizontalSpacing="0px"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
         android:padding="0dip"
         android:stretchMode="columnWidth"
         android:gravity="center" 
         android:layout_gravity="center"
-        android:verticalSpacing="0px" >
+         >
     </GridView>
 
 </RelativeLayout>
