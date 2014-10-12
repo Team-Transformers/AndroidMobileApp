@@ -8,9 +8,15 @@ import com.telerik.everlive.sdk.core.result.RequestResult;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,7 +31,11 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	public final static String ID_EXTRA = "com.transformers.hotelcatalog._ID";
+	private static final String TABLE_NAME = "hotel";
+	private static final String ABOUT_HOTEL_INFO_MESSAGE = "Put some decent \"About\" information here!";
 	private List<Hotel> hotels = new ArrayList<Hotel>();
+	Context context = this;
+	SQLiteDatabase db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,7 @@ public class MainActivity extends Activity {
 		populateHotels();
 		populateListView();
 		registerClickCallback();
+		InitializeAboutApp();
 	}
 
 	private void populateHotels() {
@@ -109,23 +120,40 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// // Inflate the menu; this adds items to the action bar if it is present.
-	// getMenuInflater().inflate(R.menu.main, menu);
-	// return true;
-	// }
-	//
-	// @Override
-	// public boolean onOptionsItemSelected(MenuItem item) {
-	// // Handle action bar item clicks here. The action bar will
-	// // automatically handle clicks on the Home/Up button, so long
-	// // as you specify a parent activity in AndroidManifest.xml.
-	// int id = item.getItemId();
-	// if (id == R.id.action_settings) {
-	// return true;
-	// }
-	// return super.onOptionsItemSelected(item);
-	// }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) { 
+			Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+			cursor.moveToFirst();
+			
+			// TODO: make it popupWindow or something else
+			Toast.makeText(context, cursor.getString(0), Toast.LENGTH_LONG).show();
+			
+			cursor.close();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	private void InitializeAboutApp() {
+		db=openOrCreateDatabase("HotelAbout", Context.MODE_PRIVATE, null);
+		db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+"(comment VARCHAR);");
+		// TODO: fix bug where old records never deleted or double or more inserted
+		//db.delete(TABLE_NAME, null, null);
+		
+		ContentValues values = new ContentValues();
+		values.put("comment", ABOUT_HOTEL_INFO_MESSAGE);
+		db.insert(TABLE_NAME, null, values);
+	}
 }
