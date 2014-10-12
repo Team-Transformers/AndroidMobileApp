@@ -2,8 +2,10 @@ package com.transformers.hotelcatalog;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.result.RequestResult;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("ShowToast")
-public class MainActivity extends Activity{
+public class MainActivity extends Activity {
 
 	public final static String ID_EXTRA = "com.transformers.hotelcatalog._ID";
 	private List<Hotel> hotels = new ArrayList<Hotel>();
@@ -45,12 +47,12 @@ public class MainActivity extends Activity{
 	}
 
 	private void populateHotels() {
-		hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton));
-		hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton));
-		hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton));
-		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton));
-		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton));
-		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton));
+		hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
+		hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
+		hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
+		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
+		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton, 4));
+		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
 	}
 
 	private void populateListView() {
@@ -69,6 +71,8 @@ public class MainActivity extends Activity{
 				Hotel clickedHotel = hotels.get(position);
 				Intent i = new Intent(MainActivity.this, HotelOptions.class);
 				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
+				i.putExtra("Rating", String.valueOf(clickedHotel.getRating()));
+				
 				startActivity(i);
 			}
 		});

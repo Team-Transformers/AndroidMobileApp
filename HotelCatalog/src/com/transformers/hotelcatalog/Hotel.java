@@ -5,18 +5,20 @@ import com.telerik.everlive.sdk.core.serialization.ServerType;
 
 @ServerType("Hotel")
 public class Hotel extends DataItem {
+	
 	private String name;
 	private String location;
 	private String info;
-
 	private String address;
-	private int IconID;
+	private int iconID;
+	private int rating;
 
-	public Hotel(String name, String location, int iconID) {
+	public Hotel(String name, String location, int iconID, int rating) {
 		super();
 		this.name = name;
 		this.location = location;
-		this.IconID = iconID;
+		this.iconID = iconID;
+		this.rating = rating;
 	}
 
 	public String getName() {
@@ -28,7 +30,7 @@ public class Hotel extends DataItem {
 	}
 
 	public int getIconID() {
-		return IconID;
+		return iconID;
 	}
 
 	public String getInfo() {
@@ -37,5 +39,9 @@ public class Hotel extends DataItem {
 
 	public String getAddress() {
 		return address;
+	}
+
+	public int getRating() {
+		return rating;
 	}
 }
