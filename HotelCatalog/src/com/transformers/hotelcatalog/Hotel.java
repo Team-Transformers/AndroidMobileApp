@@ -1,31 +1,65 @@
 package com.transformers.hotelcatalog;
 
+import java.util.UUID;
+
 import com.telerik.everlive.sdk.core.model.base.DataItem;
+import com.telerik.everlive.sdk.core.model.system.GeoPoint;
+import com.telerik.everlive.sdk.core.serialization.ServerIgnore;
+import com.telerik.everlive.sdk.core.serialization.ServerProperty;
 import com.telerik.everlive.sdk.core.serialization.ServerType;
 
 @ServerType("Hotel")
 public class Hotel extends DataItem {
+	@ServerIgnore
+	private UUID id;
 	
+	@ServerProperty("HotelName")
 	private String name;
-	private String location;
+	
+	@ServerProperty("HotelLocation")
+	private GeoPoint location;
+	
+	@ServerProperty("HotelInfo")
 	private String info;
+	
+	@ServerProperty("HotelAddress")
 	private String address;
+	
+	@ServerIgnore
 	private int iconID;
+	
+	@ServerProperty("HotelRating")
 	private int rating;
 
-	public Hotel(String name, String location, int iconID, int rating) {
+	public Hotel(){
 		super();
+	}
+	
+	public Hotel(String name) {
+		this();
 		this.name = name;
-		this.location = location;
+	}
+	
+	public Hotel(String name, String address, int iconID, int rating) {
+		this(name);
+		this.address = address;
 		this.iconID = iconID;
 		this.rating = rating;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getLocation() {
+	public GeoPoint getLocation() {
 		return location;
 	}
 
