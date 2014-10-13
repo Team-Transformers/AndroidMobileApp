@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.http.impl.client.RequestWrapper;
+
 import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
@@ -41,6 +43,7 @@ public class MainActivity extends Activity {
 	Context context = this;
 	SQLiteDatabase db;
 	ListView list;
+	ArrayAdapter<Hotel> adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		list = (ListView) findViewById(R.id.hotelsListView);
+
+		adapter = new HotelsListAdapter();
+		list.setAdapter(adapter);
 		
 		DbRemote.GetInstance().setEverlive("0LOLF0K5aFI9RsSE");
 		DbRemote.GetInstance().getAllHotels(new RequestResultCallbackAction<ArrayList<Hotel>>() {
@@ -56,18 +62,21 @@ public class MainActivity extends Activity {
 						if (requestResult.getSuccess()) {
 							//CreateResultItem resultItem = (CreateResultItem) requestResult
 							//		.getValue();
-							//Koza goal = new Koza("Pesho");
-							//Log.d("d1", String.valueOf(requestResult.getValue().size()));
-							for (Hotel hotel : requestResult.getValue()) {
-								Log.d("d1", String.valueOf(hotel.getServerId()));
-							}
+//							for (Hotel hotel : requestResult.getValue()) {
+//								Log.d("d1", String.valueOf(hotel.getServerId()));
+//							}
 							
-//							listView.post(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    ideasFragment.getIdeaAdapter().notifyDataSetChanged();
-//                                }
-//                            });
+							hotels = requestResult.getValue();
+							
+							list.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                	for (Hotel hotel : hotels) {
+										adapter.add(hotel);
+									}
+                                	adapter.notifyDataSetChanged();
+                                }
+                            });
 						}
 						else{
 							Log.d("d1", "Sled malko");
@@ -80,8 +89,7 @@ public class MainActivity extends Activity {
 
 		Log.d("d1", "onCreate");
 		
-		populateHotels();
-		populateListView();
+		//populateHotels();
 		registerClickCallback();
 		InitializeAboutApp();
 	}
@@ -100,11 +108,6 @@ public class MainActivity extends Activity {
 //		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
 //		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton, 4));
 //		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
-	}
-
-	private void populateListView() {
-		ArrayAdapter<Hotel> adapter = new HotelsListAdapter();
-		list.setAdapter(adapter);
 	}
 
 	private void registerClickCallback() {
