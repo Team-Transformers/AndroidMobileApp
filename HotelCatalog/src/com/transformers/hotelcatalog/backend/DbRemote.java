@@ -27,12 +27,6 @@ public class DbRemote {
 		this.app = new EverliveApp(apiKey);
 	}
 
-	// public void getAllHotels(RequestResultCallbackAction<ArrayList<Koza>>
-	// callbackAction) {
-	// this.app.workWith().data(Koza.class).getAll()
-	// .executeAsync(callbackAction);
-	// }
-
 	public void getAllHotels(
 			RequestResultCallbackAction<ArrayList<Hotel>> callbackAction) {
 		this.app.workWith().data(Hotel.class).getAll()
