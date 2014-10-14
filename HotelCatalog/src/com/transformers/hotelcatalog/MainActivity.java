@@ -49,47 +49,50 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		list = (ListView) findViewById(R.id.hotelsListView);
 
 		adapter = new HotelsListAdapter();
 		list.setAdapter(adapter);
-		
+
 		DbRemote.GetInstance().setEverlive("0LOLF0K5aFI9RsSE");
-		DbRemote.GetInstance().getAllHotels(new RequestResultCallbackAction<ArrayList<Hotel>>() {
+		DbRemote.GetInstance().getAllHotels(
+				new RequestResultCallbackAction<ArrayList<Hotel>>() {
 					@Override
-					public void invoke(RequestResult<ArrayList<Hotel>> requestResult) {
+					public void invoke(
+							RequestResult<ArrayList<Hotel>> requestResult) {
 						if (requestResult.getSuccess()) {
-							//CreateResultItem resultItem = (CreateResultItem) requestResult
-							//		.getValue();
-//							for (Hotel hotel : requestResult.getValue()) {
-//								Log.d("d1", String.valueOf(hotel.getServerId()));
-//							}
-							
+							// CreateResultItem resultItem = (CreateResultItem)
+							// requestResult
+							// .getValue();
+							// for (Hotel hotel : requestResult.getValue()) {
+							// Log.d("d1", String.valueOf(hotel.getServerId()));
+							// }
+
 							hotels = requestResult.getValue();
-							
+
 							list.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                	for (Hotel hotel : hotels) {
+								@Override
+								public void run() {
+									for (Hotel hotel : hotels) {
 										adapter.add(hotel);
 									}
-                                	adapter.notifyDataSetChanged();
-                                }
-                            });
-						}
-						else{
+									adapter.notifyDataSetChanged();
+								}
+							});
+						} else {
 							Log.d("d1", "Sled malko");
 						}
-						
+
 						// TODO: Connect result with hotels ArrayList
-						// TODO: Not straightforward to do because of Async operation
+						// TODO: Not straightforward to do because of Async
+						// operation
 					}
 				});
 
 		Log.d("d1", "onCreate");
-		
-		//populateHotels();
+
+		// populateHotels();
 		registerClickCallback();
 		InitializeAboutApp();
 	}
@@ -102,12 +105,13 @@ public class MainActivity extends Activity {
 		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
 		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton, 4));
 		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
-//		hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
-//		hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
-//		hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
-//		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
-//		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton, 4));
-//		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
+		// hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
+		// hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
+		// hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
+		// hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
+		// hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton,
+		// 4));
+		// hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
 	}
 
 	private void registerClickCallback() {
@@ -121,7 +125,7 @@ public class MainActivity extends Activity {
 				Intent i = new Intent(MainActivity.this, HotelOptions.class);
 				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
 				i.putExtra("Rating", String.valueOf(clickedHotel.getRating()));
-				i.putExtra("Town", String.valueOf(clickedHotel.getLocation()));
+				i.putExtra("Town", String.valueOf(clickedHotel.getAddress()));
 
 				startActivity(i);
 			}
@@ -153,7 +157,8 @@ public class MainActivity extends Activity {
 
 			TextView textLocation = (TextView) itemView
 					.findViewById(R.id.item_hotelLocation);
-			textLocation.setText(currentHotel.getAddress());
+			String address = currentHotel.getAddress();
+			textLocation.setText(address.substring(0, address.indexOf(",")));
 
 			return itemView;
 		}
