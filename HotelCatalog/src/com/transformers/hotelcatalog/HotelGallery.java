@@ -29,7 +29,7 @@ public class HotelGallery extends Activity {
 		imageAdapter = new ImageAdapter(HotelGallery.this);
 		gallery.setAdapter(imageAdapter);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -38,10 +38,12 @@ public class HotelGallery extends Activity {
 	}
 
 	private void generateDataFromBackend() {
-		DbRemote.GetInstance().getAllPicturesByHotelId(UUID.fromString(hotelId),
+		DbRemote.GetInstance().getAllPicturesByHotelId(
+				UUID.fromString(hotelId),
 				new RequestResultCallbackAction<ArrayList<PictureDataItem>>() {
 					@Override
-					public void invoke(final RequestResult<ArrayList<PictureDataItem>> requestResult) {
+					public void invoke(
+							final RequestResult<ArrayList<PictureDataItem>> requestResult) {
 						if (requestResult.getSuccess()) {
 							Log.d("d1", "Success!");
 							for (PictureDataItem i : requestResult.getValue()) {
