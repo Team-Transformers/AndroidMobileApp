@@ -7,6 +7,10 @@ import android.util.Log;
 
 import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.query.definition.FieldsDefinition;
+import com.telerik.everlive.sdk.core.query.definition.filtering.simple.ValueCondition;
+import com.telerik.everlive.sdk.core.query.definition.filtering.simple.ValueConditionOperator;
+import com.telerik.everlive.sdk.core.query.definition.sorting.SortDirection;
+import com.telerik.everlive.sdk.core.query.definition.sorting.SortingDefinition;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
 import com.transformers.hotelcatalog.Hotel;
@@ -29,40 +33,38 @@ public class DbRemote {
 
 	public void getAllHotels(
 			RequestResultCallbackAction<ArrayList<Hotel>> callbackAction) {
-		this.app.workWith().data(Hotel.class).getAll()
-				.executeAsync(callbackAction);
+		// Sorting
+		SortingDefinition sortDef = new SortingDefinition("HotelRating", SortDirection.Descending);
+		
+		this.app.workWith().data(Hotel.class).getAll().sort(sortDef).executeAsync(callbackAction);
 	}
 
-	public void getHotelsProjection(RequestResultCallbackAction<ArrayList<Hotel>> callbackAction) {
-		FieldsDefinition includedFieldsDefinition = new FieldsDefinition();
-	    includedFieldsDefinition.addIncludedFields("HotelName");
-	    
-		this.app.workWith().data(Hotel.class).get()
-				.select(includedFieldsDefinition).executeAsync(callbackAction);
-	}
-	
-	public void getHotelById(UUID id,
+//	public void getHotelsProjection(
+//			RequestResultCallbackAction<ArrayList<Hotel>> callbackAction) {
+//		FieldsDefinition includedFieldsDefinition = new FieldsDefinition();
+//		includedFieldsDefinition.addIncludedFields("HotelName");
+//
+//		this.app.workWith().data(Hotel.class).get()
+//				.select(includedFieldsDefinition).executeAsync(callbackAction);
+//	}
+
+	public void getHotelByIdWithProjection(UUID id, String[] columns,
 			RequestResultCallbackAction<Hotel> callbackAction) {
-		this.app.workWith().data(Hotel.class).getById(id).executeAsync(callbackAction);
-		
-		/* You call like this
-		 * 
-		 * 
-		 * 
-		 * 		DbRemote.GetInstance().getHotelById(UUID.fromString("b6ef7770-52b6-11e4-91a4-4365342c4751"), new RequestResultCallbackAction<Hotel>() {
-					@Override
-					public void invoke(RequestResult<Hotel> requestResult) {
-						if (requestResult.getSuccess()) {
-							Log.d("d1", String.valueOf(((Hotel)requestResult.getValue()).getName()));
-						}
-						else{
-							Log.d("d1", "Sled malko");
-						}
-					}
-				});
-		 * 
-		 * */
+		FieldsDefinition includedFieldsDefinition = new FieldsDefinition();
+		includedFieldsDefinition.addIncludedFields(columns);
+
+		this.app.workWith().data(Hotel.class).getById(id)
+				.select(includedFieldsDefinition).executeAsync(callbackAction);
+
 	}
-	
+
+	public void getAllPicturesByHotelId(UUID hotelId,
+			RequestResultCallbackAction<ArrayList<PictureDataItem>> callbackAction) {
+		
+		ValueCondition valueCond = new ValueCondition("HotelId", hotelId, ValueConditionOperator.EqualTo);
+		this.app.workWith().data(PictureDataItem.class).get()
+		        .where(valueCond).executeAsync(callbackAction);
+	}
+
 	// TODO: add methods for Create
 }

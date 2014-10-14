@@ -83,36 +83,22 @@ public class MainActivity extends Activity {
 						} else {
 							Log.d("d1", "Sled malko");
 						}
-
-						// TODO: Connect result with hotels ArrayList
-						// TODO: Not straightforward to do because of Async
-						// operation
 					}
 				});
 
-		Log.d("d1", "onCreate");
-
-		// populateHotels();
 		registerClickCallback();
 		InitializeAboutApp();
 	}
 
-	private void populateHotels() {
-		hotels.add(new Hotel("Hemus", "Sofia", R.drawable.hilton, 5));
-		hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
-		hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
-		hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
-		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
-		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton, 4));
-		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
-		// hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
-		// hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
-		// hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
-		// hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
-		// hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton,
-		// 4));
-		// hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
-	}
+//	private void populateHotels() {
+//		hotels.add(new Hotel("Hemus", "Sofia", R.drawable.hilton, 5));
+//		hotels.add(new Hotel("Sheraton", "Sofia", R.drawable.hilton, 5));
+//		hotels.add(new Hotel("Hilton", "Sofia", R.drawable.hilton, 5));
+//		hotels.add(new Hotel("Kempinski", "Sofia", R.drawable.hilton, 4));
+//		hotels.add(new Hotel("Bulgaria", "Burgas", R.drawable.hilton, 3));
+//		hotels.add(new Hotel("Sankt Peterburg", "Plovdiv", R.drawable.hilton, 4));
+//		hotels.add(new Hotel("Pliska", "Sofia", R.drawable.hilton, 3));
+//	}
 
 	private void registerClickCallback() {
 		ListView list = (ListView) findViewById(R.id.hotelsListView);
@@ -126,6 +112,7 @@ public class MainActivity extends Activity {
 				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
 				i.putExtra("Rating", String.valueOf(clickedHotel.getRating()));
 				i.putExtra("Town", String.valueOf(clickedHotel.getAddress()));
+				i.putExtra("id", String.valueOf(clickedHotel.getServerId()));
 
 				startActivity(i);
 			}

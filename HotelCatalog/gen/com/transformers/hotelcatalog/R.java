@@ -31,29 +31,31 @@ public final class R {
         public static final int reservations=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f080016;
+        public static final int action_settings=0x7f080018;
+        public static final int btnEditInfo=0x7f080008;
         public static final int contact_frag=0x7f080002;
-        public static final int contacts_text=0x7f08000e;
-        public static final int gallery_text=0x7f08000b;
+        public static final int contacts_text=0x7f080010;
+        public static final int etHotelInfo=0x7f080007;
+        public static final int gallery_text=0x7f08000d;
         public static final int grid_gallery=0x7f080005;
         public static final int hotel_contacts=0x7f080003;
         public static final int hotel_gallery=0x7f080004;
-        public static final int hotel_info=0x7f080006;
-        public static final int hotel_reservations=0x7f080012;
-        public static final int hotel_title=0x7f080007;
-        public static final int hotel_town=0x7f080011;
+        public static final int hotel_reservations=0x7f080014;
+        public static final int hotel_title=0x7f080009;
+        public static final int hotel_town=0x7f080013;
         public static final int hotelsListView=0x7f080001;
-        public static final int icon_contacts=0x7f080008;
-        public static final int icon_gallery=0x7f080009;
-        public static final int icon_info=0x7f08000d;
-        public static final int icon_reservations=0x7f08000a;
-        public static final int info_text=0x7f08000c;
-        public static final int item_hotelLocation=0x7f080014;
+        public static final int icon_contacts=0x7f08000a;
+        public static final int icon_gallery=0x7f08000b;
+        public static final int icon_info=0x7f08000f;
+        public static final int icon_reservations=0x7f08000c;
+        public static final int info_text=0x7f08000e;
+        public static final int item_hotelLocation=0x7f080016;
         public static final int item_hotelName=0x7f080000;
-        public static final int item_imageIcon=0x7f080013;
-        public static final int item_info=0x7f080015;
-        public static final int ratingBar=0x7f080010;
-        public static final int reservations_text=0x7f08000f;
+        public static final int item_imageIcon=0x7f080015;
+        public static final int item_info=0x7f080017;
+        public static final int ratingBar=0x7f080012;
+        public static final int reservations_text=0x7f080011;
+        public static final int tvHotelInfo=0x7f080006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

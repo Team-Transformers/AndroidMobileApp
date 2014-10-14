@@ -1,6 +1,7 @@
 package com.transformers.hotelcatalog;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.View.OnClickListener;
 
 public class HotelOptions extends Activity {
 
+	private Context context = this;
 	private TextView hotelTitle = null;
 	private TextView hotelTown = null;
 	private ImageView info = null;
@@ -19,6 +21,7 @@ public class HotelOptions extends Activity {
 	private ImageView reservations = null;
 	private ImageView contacts = null;
 	private RatingBar rb;
+	private String hotelId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,9 @@ public class HotelOptions extends Activity {
 
 			public void onClick(View view) {
 				Intent infoIntent = new Intent(HotelOptions.this, HotelInfo.class);
-//				infoIntent.putExtra("ID", "ID_FROM_MAIN_ACTIVITY");
+				infoIntent.putExtra("id", hotelId);
 				startActivity(infoIntent);
-//				Toast.makeText(HotelOptions.this, "Info clicked", Toast.LENGTH_SHORT).show();
+//				Toast.makeText(HotelOptions.this, hotelId, Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -44,7 +47,7 @@ public class HotelOptions extends Activity {
 
 			public void onClick(View view) {
 				Intent galleryIntent = new Intent(HotelOptions.this, HotelGallery.class);
-//				galleryIntent.putExtra("ID", "ID_FROM_MAIN_ACTIVITY");
+				galleryIntent.putExtra("id", hotelId);
 				startActivity(galleryIntent);
 //				Toast.makeText(HotelOptions.this, "Gallery clicked", Toast.LENGTH_SHORT).show();
 			}
@@ -78,12 +81,15 @@ public class HotelOptions extends Activity {
 		String data = getIntent().getStringExtra("Name");
 		String ratingString = getIntent().getStringExtra("Rating");
 		String town = getIntent().getStringExtra("Town");
+		String id = getIntent().getStringExtra("id");
+		this.hotelId = id;
+		//Toast.makeText(HotelOptions.this, hotelId, Toast.LENGTH_SHORT).show();
 
 		hotelTitle = (TextView) findViewById(R.id.hotel_title);
 		hotelTitle.setText("Hotel " + data);
 		
 		hotelTown = (TextView) findViewById(R.id.hotel_town);
-		hotelTown.setText(town);
+		hotelTown.setText(town.substring(0, town.indexOf(",")));
 
 		int rating = Integer.parseInt(ratingString);
 		rb = (RatingBar) findViewById(R.id.ratingBar);
