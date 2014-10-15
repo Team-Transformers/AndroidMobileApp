@@ -36,6 +36,7 @@ import android.widget.Toast;
 @SuppressLint("ShowToast")
 public class MainActivity extends Activity {
 
+	public final static String EVERLIVE_API_KEY = "0LOLF0K5aFI9RsSE";
 	public final static String ID_EXTRA = "com.transformers.hotelcatalog._ID";
 	private static final String TABLE_NAME = "hotel";
 	private static final String ABOUT_HOTEL_INFO_MESSAGE = "Put some decent \"About\" information here!";
@@ -55,7 +56,7 @@ public class MainActivity extends Activity {
 		adapter = new HotelsListAdapter();
 		list.setAdapter(adapter);
 
-		DbRemote.GetInstance().setEverlive("0LOLF0K5aFI9RsSE");
+		DbRemote.GetInstance().setEverlive(EVERLIVE_API_KEY);
 		DbRemote.GetInstance().getAllHotels(
 				new RequestResultCallbackAction<ArrayList<Hotel>>() {
 					@Override

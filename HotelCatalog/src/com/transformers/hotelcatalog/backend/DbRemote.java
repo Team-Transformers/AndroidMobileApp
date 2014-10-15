@@ -17,7 +17,7 @@ import com.transformers.hotelcatalog.Hotel;
 
 public class DbRemote {
 
-	private EverliveApp app;
+	public EverliveApp app;
 	private static DbRemote instance;
 
 	public static DbRemote GetInstance() {
@@ -39,15 +39,6 @@ public class DbRemote {
 		this.app.workWith().data(Hotel.class).getAll().sort(sortDef).executeAsync(callbackAction);
 	}
 
-//	public void getHotelsProjection(
-//			RequestResultCallbackAction<ArrayList<Hotel>> callbackAction) {
-//		FieldsDefinition includedFieldsDefinition = new FieldsDefinition();
-//		includedFieldsDefinition.addIncludedFields("HotelName");
-//
-//		this.app.workWith().data(Hotel.class).get()
-//				.select(includedFieldsDefinition).executeAsync(callbackAction);
-//	}
-
 	public void getHotelByIdWithProjection(UUID id, String[] columns,
 			RequestResultCallbackAction<Hotel> callbackAction) {
 		FieldsDefinition includedFieldsDefinition = new FieldsDefinition();
@@ -64,6 +55,11 @@ public class DbRemote {
 		ValueCondition valueCond = new ValueCondition("HotelId", hotelId, ValueConditionOperator.EqualTo);
 		this.app.workWith().data(PictureDataItem.class).get()
 		        .where(valueCond).executeAsync(callbackAction);
+	}
+	
+	public String getDownloadLink(UUID fileId)
+	{
+	    return this.app.workWith().files().download(fileId).getDownloadPath();
 	}
 
 	// TODO: add methods for Create

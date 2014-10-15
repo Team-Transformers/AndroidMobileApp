@@ -3,11 +3,18 @@ package com.transformers.hotelcatalog;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
+import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.transformers.hotelcatalog.PictureDownloader.PictureAsyncDownloader;
+import com.transformers.hotelcatalog.backend.DbRemote;
+import com.transformers.hotelcatalog.backend.PictureDataItem;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -26,24 +33,28 @@ import android.widget.ImageView.ScaleType;
 public class ImageAdapter extends BaseAdapter {
 
 	private ImageView iv;
-	int[] images = { R.drawable.camera, R.drawable.camera, R.drawable.camera,
-//			R.drawable.camera, R.drawable.camera, R.drawable.camera,
-//			R.drawable.camera, R.drawable.camera, R.drawable.camera,
-//			R.drawable.camera, R.drawable.camera, R.drawable.camera,
-//			R.drawable.camera, R.drawable.camera, R.drawable.camera,
-//			R.drawable.camera, R.drawable.camera, R.drawable.camera,
-//			R.drawable.camera, R.drawable.camera, R.drawable.camera,
-			R.drawable.camera, R.drawable.camera, R.drawable.camera };
+	List<String> images; // ={
+							// "http://upload.wikimedia.org/wikipedia/en/d/d6/Preview_icon.png",
+	// "http://www.img2icnsapp.com/img/img2icns_icon.png",
+	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
+	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
+	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
+	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
+	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
+	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
+	// R.drawable.camera, R.drawable.camera, R.drawable.camera
+	// };
 
 	private Context context;
 
-	public ImageAdapter(Context applicationContext) {
+	public ImageAdapter(Context applicationContext, List<String> imgUrls) {
 		context = applicationContext;
+		this.images = imgUrls;
 	}
 
 	@Override
 	public int getCount() {
-		return images.length;
+		return images.size();
 	}
 
 	@Override
@@ -65,27 +76,38 @@ public class ImageAdapter extends BaseAdapter {
 			iv.setScaleType(ScaleType.CENTER_CROP);
 			iv.setPadding(10, -20, 10, -20);
 		}
-		
 
-		//new PictureAsyncDownloader().execute("http://upload.wikimedia.org/wikipedia/en/d/d6/Preview_icon.png");
-		
-		//iv.setImageResource(images[position]);
+		new PictureAsyncDownloader(iv).execute(images.get(position));
+
+		// iv.setImageResource(images[position]);
 		return iv;
 	}
-	public class PictureAsyncDownloader extends AsyncTask<String, Integer, Bitmap> {
+
+	public class PictureAsyncDownloader extends
+			AsyncTask<String, Integer, Bitmap> {
+
+		private final WeakReference imageViewReference;
+
+		public PictureAsyncDownloader(ImageView imageView) {
+			imageViewReference = new WeakReference(imageView);
+		}
 
 		@Override
 		protected Bitmap doInBackground(String... pic_url) {
+
+			String downloadLink = DbRemote.GetInstance().getDownloadLink(
+					UUID.fromString(pic_url[0]));
 			int count;
 			Bitmap img = null;
 			try {
-				URL url = new URL(pic_url[0]);
+				URL url = new URL(downloadLink);
 				URLConnection conection = url.openConnection();
 				conection.connect();
 
 				int lenghtOfFile = conection.getContentLength();
 
-				InputStream input = new BufferedInputStream(url.openStream(), 8192);
+				InputStream input = new BufferedInputStream(url.openStream(),
+						8192);
 
 				byte data[] = new byte[1024];
 				byte imgArray[] = new byte[lenghtOfFile];
@@ -101,7 +123,8 @@ public class ImageAdapter extends BaseAdapter {
 				}
 
 				input.close();
-				img = BitmapFactory.decodeByteArray(imgArray, 0, imgArray.length);
+				img = BitmapFactory.decodeByteArray(imgArray, 0,
+						imgArray.length);
 
 			} catch (Exception e) {
 				Log.d("Error: ", e.getMessage());
@@ -109,11 +132,25 @@ public class ImageAdapter extends BaseAdapter {
 
 			return img;
 		}
-		
+
 		@Override
 		protected void onPostExecute(Bitmap img) {
-			//progressDialog.dismiss();
-			iv.setImageBitmap(img);
+			// progressDialog.dismiss();
+			if (isCancelled()) {
+				img = null;
+			}
+			if (imageViewReference != null) {
+				ImageView imageView = (ImageView) imageViewReference.get();
+				if (imageView != null) {
+					if (img != null) {
+						imageView.setImageBitmap(img);
+					} else {
+						imageView.setImageDrawable(imageView.getContext()
+								.getResources()
+								.getDrawable(R.drawable.ic_launcher));
+					}
+				}
+			}
 		}
 
 	}
