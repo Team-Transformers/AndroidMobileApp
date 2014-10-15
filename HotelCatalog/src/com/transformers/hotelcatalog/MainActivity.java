@@ -186,10 +186,16 @@ public class MainActivity extends Activity {
 				+ "(comment VARCHAR);");
 		// TODO: fix bug where old records never deleted or double or more
 		// inserted
-		// db.delete(TABLE_NAME, null, null);
+		//db.delete(TABLE_NAME, null, null);
 
 		ContentValues values = new ContentValues();
 		values.put("comment", ABOUT_HOTEL_INFO_MESSAGE);
 		db.insert(TABLE_NAME, null, values);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		//TODO: db = drop;
 	}
 }
