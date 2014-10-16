@@ -1,5 +1,6 @@
 package com.transformers.hotelcatalog.backend;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -7,6 +8,7 @@ import android.util.Log;
 
 import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.query.definition.FieldsDefinition;
+import com.telerik.everlive.sdk.core.query.definition.FileField;
 import com.telerik.everlive.sdk.core.query.definition.filtering.simple.ValueCondition;
 import com.telerik.everlive.sdk.core.query.definition.filtering.simple.ValueConditionOperator;
 import com.telerik.everlive.sdk.core.query.definition.sorting.SortDirection;
@@ -46,7 +48,6 @@ public class DbRemote {
 
 		this.app.workWith().data(Hotel.class).getById(id)
 				.select(includedFieldsDefinition).executeAsync(callbackAction);
-
 	}
 
 	public void getAllPicturesByHotelId(UUID hotelId,
@@ -62,5 +63,9 @@ public class DbRemote {
 	    return this.app.workWith().files().download(fileId).getDownloadPath();
 	}
 
-	// TODO: add methods for Create
+	public void UploadFileWithHotelId(String fileName, String contentType, InputStream inputStream,
+			RequestResultCallbackAction callbackAction){
+		FileField fileField = new FileField(fileName, contentType, inputStream);
+		this.app.workWith().files().upload(fileField).executeAsync(callbackAction);
+	}
 }

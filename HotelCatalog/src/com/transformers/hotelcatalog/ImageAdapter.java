@@ -33,17 +33,7 @@ import android.widget.ImageView.ScaleType;
 public class ImageAdapter extends BaseAdapter {
 
 	private ImageView iv;
-	List<String> images; // ={
-							// "http://upload.wikimedia.org/wikipedia/en/d/d6/Preview_icon.png",
-	// "http://www.img2icnsapp.com/img/img2icns_icon.png",
-	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
-	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
-	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
-	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
-	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
-	// R.drawable.camera, R.drawable.camera, R.drawable.camera,
-	// R.drawable.camera, R.drawable.camera, R.drawable.camera
-	// };
+	List<String> images;
 
 	private Context context;
 
@@ -97,6 +87,7 @@ public class ImageAdapter extends BaseAdapter {
 
 			String downloadLink = DbRemote.GetInstance().getDownloadLink(
 					UUID.fromString(pic_url[0]));
+			Log.d("d2", downloadLink);
 			int count;
 			Bitmap img = null;
 			try {
