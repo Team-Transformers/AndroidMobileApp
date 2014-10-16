@@ -4,6 +4,15 @@
     <string name="app_name">Hotel Catalog</string>
     <string name="action_settings">About</string>
     <string name="hotel_titles">Hotel List</string>
+    <string name="contact_info">Contact Information</string>
+    <string name="no_location">No location found</string>
+    <string name="image_gallery">Image Gallery</string>
+    <string name="button_pic">Take a picture!</string>
+    <string name="info">Information</string>
+    <string name="contacts">Contacts</string>
+    <string name="reservations">Reservations</string>
+    <string name="hotel_town">Hotel town</string>
+    
     
 
 </resources>
