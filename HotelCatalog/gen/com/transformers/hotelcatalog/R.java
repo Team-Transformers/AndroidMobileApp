@@ -404,15 +404,17 @@ containing a value of this type.
         public static final int contacts=0x7f02001b;
         public static final int gallery=0x7f02001c;
         public static final int hilton=0x7f02001d;
-        public static final int ic_launcher=0x7f02001e;
-        public static final int ic_plusone_medium_off_client=0x7f02001f;
-        public static final int ic_plusone_small_off_client=0x7f020020;
-        public static final int ic_plusone_standard_off_client=0x7f020021;
-        public static final int ic_plusone_tall_off_client=0x7f020022;
-        public static final int info=0x7f020023;
-        public static final int powered_by_google_dark=0x7f020024;
-        public static final int powered_by_google_light=0x7f020025;
-        public static final int reservations=0x7f020026;
+        public static final int hotel=0x7f02001e;
+        public static final int ic_launcher=0x7f02001f;
+        public static final int ic_plusone_medium_off_client=0x7f020020;
+        public static final int ic_plusone_small_off_client=0x7f020021;
+        public static final int ic_plusone_standard_off_client=0x7f020022;
+        public static final int ic_plusone_tall_off_client=0x7f020023;
+        public static final int info=0x7f020024;
+        public static final int no_connection=0x7f020025;
+        public static final int powered_by_google_dark=0x7f020026;
+        public static final int powered_by_google_light=0x7f020027;
+        public static final int reservations=0x7f020028;
     }
     public static final class id {
         public static final int action_settings=0x7f07002e;
@@ -475,6 +477,7 @@ containing a value of this type.
         public static final int hotel_options=0x7f030005;
         public static final int hotel_reservations=0x7f030006;
         public static final int hotel_view=0x7f030007;
+        public static final int notifications=0x7f030008;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

@@ -13,12 +13,17 @@ import com.transformers.hotelcatalog.backend.DbRemote;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -40,7 +45,9 @@ public class MainActivity extends Activity {
 	public final static String ID_EXTRA = "com.transformers.hotelcatalog._ID";
 	private static final String TABLE_NAME = "hotel";
 	private static final String ABOUT_HOTEL_INFO_MESSAGE = "Put some decent \"About\" information here!";
+	private static final int NOTIFICATION_ID = 0;
 	private List<Hotel> hotels = new ArrayList<Hotel>();
+	private NotificationManager mNM;
 	Context context = this;
 	SQLiteDatabase db;
 	ListView list;
@@ -50,7 +57,30 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		// setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
+		ConnectivityManager conManager = (ConnectivityManager)getSystemService(this.CONNECTIVITY_SERVICE);
+		NetworkInfo nInfo = conManager.getActiveNetworkInfo();
+		
+		if(nInfo==null){
+//			 Toast.makeText(this, "Yok mreja bart mi!", Toast.LENGTH_SHORT).show();
+			
+			 mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			 Notification n = new Notification();
+			 n.icon = R.drawable.no_connection;
+			 n.tickerText = "No internet connection...";
+			 n.when = System.currentTimeMillis();
+			 
+			 Intent notificationIntent = new Intent(this, Notifications.class);
+			 PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+			 
+			 CharSequence contentText = "Please check your internet connection...";
+			 CharSequence contentTitle = "No Internet";
+			 n.setLatestEventInfo(this, contentTitle, contentText, contentIntent);
+			 mNM.notify(NOTIFICATION_ID, n);
+		}
+		
+		
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		list = (ListView) findViewById(R.id.hotelsListView);
 
 		adapter = new HotelsListAdapter();
@@ -106,8 +136,7 @@ public class MainActivity extends Activity {
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View viewClicked,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
 				Hotel clickedHotel = hotels.get(position);
 				Intent i = new Intent(MainActivity.this, HotelOptions.class);
 				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
