@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
 import com.transformers.hotelcatalog.backend.DbRemote;
+import com.transformers.hotelcatalog.backend.HotelDataItem;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,15 +41,15 @@ public class HotelInfo extends Activity {
 
 	private void generateDataFromBackend() {
 		DbRemote.GetInstance().getHotelByIdWithProjection(UUID.fromString(hotelId), new String[] {"HotelName", "HotelInfo"},
-				new RequestResultCallbackAction<Hotel>() {
+				new RequestResultCallbackAction<HotelDataItem>() {
 					@Override
-					public void invoke(final RequestResult<Hotel> requestResult) {
+					public void invoke(final RequestResult<HotelDataItem> requestResult) {
 						if (requestResult.getSuccess()) {
 							runOnUiThread(new Runnable() {
 
 								@Override
 								public void run() {
-									Hotel hotel = requestResult.getValue();
+									HotelDataItem hotel = requestResult.getValue();
 									tvTitle.setText(hotel.getName() + " Information");
 									etHotelInfo.setText(
 											requestResult.getValue().getInfo());

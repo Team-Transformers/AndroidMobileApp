@@ -9,10 +9,13 @@ import java.util.UUID;
 import com.telerik.everlive.sdk.core.model.system.File;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
+import com.transformers.hotelcatalog.PictureDownloader.ImageAdapter;
 import com.transformers.hotelcatalog.backend.DbRemote;
 import com.transformers.hotelcatalog.backend.PictureDataItem;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
@@ -70,7 +73,8 @@ public class HotelGallery extends Activity {
 							if (result.getSuccess()) {
 								Log.d("d1", "SUCCES! Kartinkata");
 
-								ArrayList<File> files = (ArrayList<File>) result.getValue();
+								ArrayList<File> files = (ArrayList<File>) result
+										.getValue();
 								File file = files.get(0);
 								UUID id = UUID.fromString(file.getId()
 										.toString());
@@ -78,16 +82,39 @@ public class HotelGallery extends Activity {
 								Log.d("d1", "6teeeeeeeeeeeeee");
 
 								PictureDataItem pic = new PictureDataItem();
-								pic.setHotelId(UUID
-										.fromString(hotelId));
+								pic.setHotelId(UUID.fromString(hotelId));
 								pic.setPicture(file.getId());
-								DbRemote.GetInstance().app.workWith().data(PictureDataItem.class)
+								DbRemote.GetInstance().app.workWith()
+										.data(PictureDataItem.class)
 										.create(pic).executeAsync();
 							} else {
 								Log.d("d1", "Fail! Kartinkata");
 							}
 						}
 					});
+			new AlertDialog.Builder(HotelGallery.this)
+			.setTitle("Picture")
+			.setMessage("Saving picture to database!")
+			.setPositiveButton(android.R.string.yes,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// continue with delete
+						}
+					}).setIcon(android.R.drawable.ic_dialog_alert)
+			.show();
+		} else {
+			new AlertDialog.Builder(HotelGallery.this)
+					.setTitle("Picture")
+					.setMessage("No picture was saved to database!")
+					.setPositiveButton(android.R.string.yes,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// continue with delete
+								}
+							}).setIcon(android.R.drawable.ic_dialog_alert)
+					.show();
 		}
 	}
 

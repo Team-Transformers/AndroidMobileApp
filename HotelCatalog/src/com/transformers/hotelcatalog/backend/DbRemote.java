@@ -15,7 +15,6 @@ import com.telerik.everlive.sdk.core.query.definition.sorting.SortDirection;
 import com.telerik.everlive.sdk.core.query.definition.sorting.SortingDefinition;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
-import com.transformers.hotelcatalog.Hotel;
 
 public class DbRemote {
 
@@ -34,19 +33,19 @@ public class DbRemote {
 	}
 
 	public void getAllHotels(
-			RequestResultCallbackAction<ArrayList<Hotel>> callbackAction) {
+			RequestResultCallbackAction<ArrayList<HotelDataItem>> callbackAction) {
 		// Sorting
 		SortingDefinition sortDef = new SortingDefinition("HotelRating", SortDirection.Descending);
 		
-		this.app.workWith().data(Hotel.class).getAll().sort(sortDef).executeAsync(callbackAction);
+		this.app.workWith().data(HotelDataItem.class).getAll().sort(sortDef).executeAsync(callbackAction);
 	}
 
 	public void getHotelByIdWithProjection(UUID id, String[] columns,
-			RequestResultCallbackAction<Hotel> callbackAction) {
+			RequestResultCallbackAction<HotelDataItem> callbackAction) {
 		FieldsDefinition includedFieldsDefinition = new FieldsDefinition();
 		includedFieldsDefinition.addIncludedFields(columns);
 
-		this.app.workWith().data(Hotel.class).getById(id)
+		this.app.workWith().data(HotelDataItem.class).getById(id)
 				.select(includedFieldsDefinition).executeAsync(callbackAction);
 	}
 

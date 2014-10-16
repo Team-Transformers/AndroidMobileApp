@@ -10,6 +10,7 @@ import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
 import com.transformers.hotelcatalog.backend.DbRemote;
+import com.transformers.hotelcatalog.backend.HotelDataItem;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -46,12 +47,12 @@ public class MainActivity extends Activity {
 	private static final String TABLE_NAME = "hotel";
 	private static final String ABOUT_HOTEL_INFO_MESSAGE = "Put some decent \"About\" information here!";
 	private static final int NOTIFICATION_ID = 0;
-	private List<Hotel> hotels = new ArrayList<Hotel>();
+	private List<HotelDataItem> hotels = new ArrayList<HotelDataItem>();
 	private NotificationManager mNM;
 	Context context = this;
 	SQLiteDatabase db;
 	ListView list;
-	ArrayAdapter<Hotel> adapter;
+	ArrayAdapter<HotelDataItem> adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +89,10 @@ public class MainActivity extends Activity {
 
 		DbRemote.GetInstance().setEverlive(EVERLIVE_API_KEY);
 		DbRemote.GetInstance().getAllHotels(
-				new RequestResultCallbackAction<ArrayList<Hotel>>() {
+				new RequestResultCallbackAction<ArrayList<HotelDataItem>>() {
 					@Override
 					public void invoke(
-							RequestResult<ArrayList<Hotel>> requestResult) {
+							RequestResult<ArrayList<HotelDataItem>> requestResult) {
 						if (requestResult.getSuccess()) {
 							// CreateResultItem resultItem = (CreateResultItem)
 							// requestResult
@@ -105,7 +106,7 @@ public class MainActivity extends Activity {
 							list.post(new Runnable() {
 								@Override
 								public void run() {
-									for (Hotel hotel : hotels) {
+									for (HotelDataItem hotel : hotels) {
 										adapter.add(hotel);
 									}
 									adapter.notifyDataSetChanged();
@@ -137,7 +138,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-				Hotel clickedHotel = hotels.get(position);
+				HotelDataItem clickedHotel = hotels.get(position);
 				Intent i = new Intent(MainActivity.this, HotelOptions.class);
 				i.putExtra("Name", String.valueOf(clickedHotel.getName()));
 				i.putExtra("Rating", String.valueOf(clickedHotel.getRating()));
@@ -149,7 +150,7 @@ public class MainActivity extends Activity {
 		});
 	}
 
-	public class HotelsListAdapter extends ArrayAdapter<Hotel> {
+	public class HotelsListAdapter extends ArrayAdapter<HotelDataItem> {
 		public HotelsListAdapter() {
 			super(MainActivity.this, R.layout.hotel_view, hotels);
 		}
@@ -162,7 +163,7 @@ public class MainActivity extends Activity {
 						parent, false);
 			}
 
-			Hotel currentHotel = hotels.get(position);
+			HotelDataItem currentHotel = hotels.get(position);
 
 			ImageView imageIcon = (ImageView) itemView
 					.findViewById(R.id.item_imageIcon);
