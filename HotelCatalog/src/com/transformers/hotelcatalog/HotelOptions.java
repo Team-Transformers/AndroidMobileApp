@@ -22,6 +22,7 @@ public class HotelOptions extends Activity {
 	private ImageView contacts = null;
 	private RatingBar rb;
 	private String hotelId;
+	private String hotelAddress;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class HotelOptions extends Activity {
 
 			public void onClick(View view) {
 				Intent contactsIntent = new Intent(HotelOptions.this, HotelContacts.class);
-//				contactsIntent.putExtra("ID", "ID_FROM_MAIN_ACTIVITY");
+				contactsIntent.putExtra("Address", hotelAddress);
 				startActivity(contactsIntent);
 //				Toast.makeText(HotelOptions.this, "Contacts clicked", Toast.LENGTH_SHORT).show();
 			}
@@ -80,9 +81,10 @@ public class HotelOptions extends Activity {
 		super.onResume();
 		String data = getIntent().getStringExtra("Name");
 		String ratingString = getIntent().getStringExtra("Rating");
-		String town = getIntent().getStringExtra("Town");
+		String town = getIntent().getStringExtra("Address");
 		String id = getIntent().getStringExtra("id");
 		this.hotelId = id;
+		this.hotelAddress = town;
 		//Toast.makeText(HotelOptions.this, hotelId, Toast.LENGTH_SHORT).show();
 
 		hotelTitle = (TextView) findViewById(R.id.hotel_title);

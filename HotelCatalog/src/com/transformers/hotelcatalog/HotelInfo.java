@@ -21,14 +21,14 @@ public class HotelInfo extends Activity {
 	private Context context;
 	private String hotelId;
 	private TextView tvTitle;
-	private EditText etHotelInfo;
+	private TextView etHotelInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hotel_info);
 		tvTitle = (TextView) this.findViewById(R.id.tvHotelInfo);
-		etHotelInfo = (EditText) this.findViewById(R.id.etHotelInfo);
+		etHotelInfo = (TextView) this.findViewById(R.id.etHotelInfo);
 	}
 
 	@Override

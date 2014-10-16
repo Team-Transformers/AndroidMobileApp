@@ -16,21 +16,22 @@
 
     <GridView
         android:id="@+id/grid_gallery"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/hotel_gallery"
+        android:layout_gravity="fill"
         android:layout_margin="0dip"
+        android:adjustViewBounds="true"
         android:columnWidth="90dp"
         android:drawSelectorOnTop="true"
-        android:verticalSpacing="10dp"
+        android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
         android:padding="0dip"
+        android:scaleType="fitXY"
         android:stretchMode="columnWidth"
-        android:gravity="center" 
-        android:layout_gravity="center"
-         >
+        android:verticalSpacing="10dp" >
     </GridView>
 
 </RelativeLayout>

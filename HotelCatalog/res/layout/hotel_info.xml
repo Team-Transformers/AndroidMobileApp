@@ -8,26 +8,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="10dp"
+        android:paddingBottom="14dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <EditText
+    <TextView
         android:id="@+id/etHotelInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.84"
-        android:ems="10"
-        android:inputType="textMultiLine" >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:ems="18"
+        android:padding="20dp"
+        android:inputType="textMultiLine" />
 
-        <requestFocus />
-    </EditText>
-
+    <!--
     <Button
         android:id="@+id/btnEditInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit Info" />
+    -->
 
 </LinearLayout>
