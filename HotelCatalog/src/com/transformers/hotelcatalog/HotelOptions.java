@@ -1,19 +1,16 @@
 package com.transformers.hotelcatalog;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.View.OnClickListener;
 
 public class HotelOptions extends Activity {
 
-	private Context context = this;
 	private TextView hotelTitle = null;
 	private TextView hotelTown = null;
 	private ImageView info = null;

@@ -2,11 +2,6 @@ package com.transformers.hotelcatalog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
-import org.apache.http.impl.client.RequestWrapper;
-
-import com.telerik.everlive.sdk.core.EverliveApp;
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.telerik.everlive.sdk.core.result.RequestResultCallbackAction;
 import com.transformers.hotelcatalog.backend.DbRemote;
@@ -32,7 +27,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -59,11 +53,10 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		ConnectivityManager conManager = (ConnectivityManager)getSystemService(this.CONNECTIVITY_SERVICE);
+		ConnectivityManager conManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo nInfo = conManager.getActiveNetworkInfo();
 		
 		if(nInfo==null){
-//			 Toast.makeText(this, "Yok mreja bart mi!", Toast.LENGTH_SHORT).show();
 			
 			 mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 			 Notification n = new Notification();

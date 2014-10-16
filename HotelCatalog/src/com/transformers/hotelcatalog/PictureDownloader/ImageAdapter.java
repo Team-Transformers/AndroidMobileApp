@@ -1,33 +1,24 @@
 package com.transformers.hotelcatalog.PictureDownloader;
 
 import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import com.telerik.everlive.sdk.core.result.RequestResult;
 import com.transformers.hotelcatalog.R;
 import com.transformers.hotelcatalog.R.drawable;
 import com.transformers.hotelcatalog.backend.DbRemote;
-import com.transformers.hotelcatalog.backend.PictureDataItem;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.text.AndroidCharacter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
@@ -77,10 +68,10 @@ public class ImageAdapter extends BaseAdapter {
 	public class PictureAsyncDownloader extends
 			AsyncTask<String, Integer, Bitmap> {
 
-		private final WeakReference imageViewReference;
+		private final WeakReference<ImageView> imageViewReference;
 
 		public PictureAsyncDownloader(ImageView imageView) {
-			imageViewReference = new WeakReference(imageView);
+			imageViewReference = new WeakReference<ImageView>(imageView);
 		}
 
 		@Override
