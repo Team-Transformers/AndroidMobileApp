@@ -17,10 +17,28 @@
 
     <CalendarView
         android:id="@+id/calendarView1"
-        android:layout_below="@+id/hotel_reservations"
+        android:layout_below="@+id/btnStopService"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnStopService"
+        android:layout_below="@+id/btnStartService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_centerHorizontal="true"
+        android:text="Stop Music" />
+
+    <Button
+        android:id="@+id/btnStartService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnStopService"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="29dp"
+        android:text="Start Music" />
 
 </RelativeLayout>

@@ -56,7 +56,11 @@
         </activity>
         <activity android:name=".HotelContacts" >
         </activity>
-
+        <service
+            android:name="com.transformers.hotelcatalog.Services.MediaPlayerService"
+            android:enabled="true" 
+            android:permission="net.thorbek.MY_SERVICE_PERMISSION" />
+        
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCduG0kze-AA1WfNaTuk_XpSitshfjL6So"

@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 	public final static String EVERLIVE_API_KEY = "0LOLF0K5aFI9RsSE";
 	public final static String ID_EXTRA = "com.transformers.hotelcatalog._ID";
 	private static final String TABLE_NAME = "hotel";
-	private static final String ABOUT_HOTEL_INFO_MESSAGE = "Put some decent \"About\" information here!";
+	private static final String ABOUT_HOTEL_INFO_MESSAGE = "The purpose of the project is to build a mobile application to provide brief information for hotels, as well as image galleries, option to make reservations and hotel’s contact information.";
 	private static final int NOTIFICATION_ID = 0;
 	private List<HotelDataItem> hotels = new ArrayList<HotelDataItem>();
 	private NotificationManager mNM;
