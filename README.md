@@ -1,2 +1,4 @@
+THIS APPLICATION IS MADE FOR TESTING PURPOSES ONLY
+
 AndroidMobileApp
 ================
